@@ -1,0 +1,32 @@
+defaults:
+  fqdn_suffix: "test.local"
+vms:
+  - name: server1 
+    box: "UbuntuServer14.04"
+    ram: 1024
+    cpus: 2
+    network: "private_network"
+    ip: "10.10.200.2"
+    controlvm:
+      setlinkstate1:
+          - "off"
+      nic2:
+        - "natnetwork"
+        - "Nat2"
+      nicpromisc2:
+        - "allow-vms"
+  - name: test2
+    box: "UbuntuServer14.04"
+    ram: 512
+    cpus: 1
+    network: "private_network"
+    ip: "10.10.200.3"
+    netname: "Nat2"
+    controlvm:
+      nic2:      
+        - "natnetwork"
+        - "Nat2"
+      nicpromisc2:
+        - "allow-vms"
+      setlinkstate1: 
+        - "off"
