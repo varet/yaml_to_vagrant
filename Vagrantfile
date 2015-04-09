@@ -24,12 +24,12 @@ Vagrant.configure(Vagrantfile_Version) do |create|
       name_of_vm = servers["name"] + "." + suffix
 
       srv.vm.box = servers["box"]
-      srv.vm.network servers["network"], ip: servers["ip"]
+      srv.vm.network servers["network"], ip: servers["ip"]  if servers["ip"]
       srv.vm.host_name = name_of_vm
       
       # Setup Memory and other parameters for your vm (also check `VBoxManage controlvm`)
       srv.vm.provider :virtualbox do |vb|
-        vb.memory = servers["ram"]
+        vb.memory = servers["ram"]    if servers["ram"]
         vb.cpus   = servers["cpus"]   if servers["cpus"]
         if servers["controlvm"] then
           servers["controlvm"].each do |dev, devvalue|
